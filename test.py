@@ -1,4 +1,4 @@
-import requests
+import requests,re
 from sys import stdout
 s=requests.session()
 url='http://one.zju.edu.cn/pass_code/zx'
@@ -20,5 +20,10 @@ for item in h.split('\n'):
 # print(header)
 p=s.get(url,headers=header)
 # print(header)
-print(p.text)
+# print(p.text)
+
+text=p.text
+pattern=re.compile("text\t: '(.+?)',")
+m=pattern.findall(text)
+print(m[0])
 stdout.flush()
